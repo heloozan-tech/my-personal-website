@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/icons/favicon-48.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/icons/icon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<meta name="theme-color" content="#0B0D12">
+<script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('intro');if(!location.hash&&'scrollRestoration' in history){history.scrollRestoration='manual';scrollTo(0,0)}}</script>
 <title>Fauzan Ardhiansyah — UI/UX & Product Designer</title>
 <meta name="description" content="Fauzan Ardhiansyah designs clear, human-centered digital products — web, dashboards and mobile apps — from first insight to polished interface.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +64,27 @@ p{margin:0}
 .nav__links a:hover::after{transform:scaleX(1);transform-origin:left}
 .brand{font:400 15px/1 var(--serif);letter-spacing:.42em;text-transform:uppercase;padding-left:.42em;display:flex;align-items:center;gap:10px}
 .brand__me{width:24px;height:24px;object-fit:cover;object-position:50% 18%;flex:none;background:#22324F}
-.nav__right{display:flex;justify-content:flex-end;align-items:center;gap:20px;font-size:14px}
+.nav__right{display:flex;justify-content:flex-end;align-items:center;gap:12px;font-size:14px}
+/* availability tag: dot + text, no background */
+.avail{display:inline-flex;align-items:center;gap:9px;height:36px;padding:0 4px;color:inherit;font-size:13.5px;white-space:nowrap;opacity:.92;transition:opacity .3s}
+.avail:hover{opacity:1}
+@media (max-width:1100px){.nav .avail__more{display:none}}
+.avail i{position:relative;width:7px;height:7px;border-radius:50%;background:#3FBF7A;flex:none}
+.avail i::after{content:"";position:absolute;inset:0;border-radius:50%;background:#3FBF7A;animation:availPing 2s ease-out infinite}
+@keyframes availPing{0%{transform:scale(1);opacity:.7}80%,100%{transform:scale(2.8);opacity:0}}
+/* light / dark toggle: moon in light mode, sun in dark mode */
+.theme-sw{position:relative;width:36px;height:36px;flex:none;display:grid;place-items:center;color:inherit;opacity:.85;transition:opacity .3s,background .3s}
+.theme-sw:hover{opacity:1;background:color-mix(in srgb,currentColor 10%,transparent)}
+.theme-sw svg{grid-area:1/1;transition:transform .55s var(--ease),opacity .35s ease}
+.theme-sw .i-sun{opacity:0;transform:rotate(-90deg) scale(.6)}
+.theme-sw[aria-checked="true"] .i-moon{opacity:0;transform:rotate(90deg) scale(.6)}
+.theme-sw[aria-checked="true"] .i-sun{opacity:1;transform:none}
+.sheet__foot{margin-top:auto;padding-top:28px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.sheet__theme{display:inline-flex;align-items:center;gap:12px;font:400 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-muted)}
+.sheet .theme-sw{color:var(--on-dark)}
+/* theme change cross-fade */
+html.theme-anim,html.theme-anim *{transition:background-color .45s ease,color .45s ease,border-color .45s ease,fill .45s ease!important}
+html.theme-anim .theme-sw svg{transition:transform .55s var(--ease),opacity .35s ease!important}
 .progress{position:absolute;left:0;bottom:-1px;height:1px;background:var(--amber);width:100%;transform-origin:left;transform:scaleX(0)}
 .menu-btn{display:none;align-items:center;gap:10px;font-size:14px;height:44px;padding-right:8px}
 .menu-btn span{display:block;width:18px;height:1px;background:currentColor;position:relative}
@@ -89,11 +116,11 @@ p{margin:0}
 .hero{position:relative;text-align:center;color:#fff;overflow:hidden;background:#0B0D12;isolation:isolate}
 /* showreel: starts inset, grows to full width as the hero scrolls away */
 .reel{margin:0;padding:0}
-.reel__frame{position:relative;width:100%;transform-origin:50% 100%;transform:scale(var(--rs,.78));will-change:transform;opacity:0;translate:0 40px;transition:opacity 1.2s var(--ease) .8s,translate 1.4s var(--ease) .8s}
+.reel__frame{position:relative;width:100%;opacity:0;translate:0 40px;transition:opacity 1.2s var(--ease) .8s,translate 1.4s var(--ease) .8s}
 .ready .reel__frame{opacity:1;translate:0 0}
 .reel{padding-top:30px}
-.reel__cap{position:absolute;left:0;right:0;bottom:100%;display:flex;justify-content:space-between;gap:16px;padding-bottom:12px;opacity:calc((1 - var(--rs,.8)) * 6)}
-.reel .crops{opacity:calc((1 - var(--rs,.8)) * 6)}
+.reel__cap{position:absolute;left:0;right:0;bottom:100%;display:flex;justify-content:space-between;gap:16px;padding:0 var(--gutter) 12px}
+.reel .crops{display:none}
 .reel__media{box-shadow:none!important}
 .reel__cap .label{color:rgba(255,255,255,.6)}
 .reel__media{position:relative;aspect-ratio:1920/1202;overflow:hidden;background:#15171B;box-shadow:0 40px 90px -40px rgba(0,0,0,.8)}
@@ -533,7 +560,7 @@ section{scroll-margin-top:64px}
   .foot{grid-template-columns:1fr}
   .foot a{border-right:0!important;border-bottom:1px solid var(--dark-line)}
   .legal{flex-direction:column}
-  .nav__right .login{display:none}
+  .nav__right .avail,.nav__right .theme-sw{display:none}
   .tabs{display:flex;margin-right:var(--gutter)}
   .tab{flex:1 1 auto;justify-content:center;padding:0 10px}
   .slider{min-height:0}
@@ -547,13 +574,53 @@ section{scroll-margin-top:64px}
 .sheet nav a{font:300 40px/1.25 var(--serif);border-bottom:1px solid var(--dark-line);padding:10px 0;display:flex;justify-content:space-between;align-items:baseline}
 .sheet nav a small{font:400 11px var(--mono);color:var(--amber)}
 
+/* ---------- Dark theme: surfaces that use fixed colours ---------- */
+[data-theme="dark"] .stage,[data-theme="dark"] .step__vis{background-color:#121417;background-image:radial-gradient(circle at 1px 1px,rgba(236,234,228,.12) 1px,transparent 0)}
+[data-theme="dark"] .stage::after{background:radial-gradient(ellipse 70% 60% at 50% 50%,transparent 40%,rgba(18,20,23,.9) 100%)}
+[data-theme="dark"] .segs i{background:rgba(236,234,228,.14)}
+[data-theme="dark"] .svc__art{background:#15171A}
+[data-theme="dark"] .svc:hover .svc__art{background:#1A1D21}
+[data-theme="dark"] .svc__art .pl{fill:#202328;stroke:#6E6B65}
+[data-theme="dark"] .svc__art .pl-b{fill:#171A1E;stroke:#6E6B65}
+[data-theme="dark"] .svc__art .ln{stroke:#6E6B65}
+[data-theme="dark"] .svc__art .bx{fill:#2A2E34;stroke:#6E6B65}
+[data-theme="dark"] .svc__art .dsh{fill:none}
+[data-theme="dark"] .svc__art .scr{fill:#8E8A80}
+[data-theme="dark"] .svc__art .ln-f{fill:#4A4D52}
+[data-theme="dark"] .svc__art .dash,[data-theme="dark"] .svc__art .pipe{stroke:#5C5A55}
+[data-theme="dark"] .svc__art .ac-btn,[data-theme="dark"] .svc__art .bar{fill:#ECEAE4}
+[data-theme="dark"] .svc:hover .svc__art .kpi{fill:#5A4128}
+[data-theme="dark"] .nav.solid:not(.on-dark) .btn--light{background:var(--ink);color:#0E0F11}
+
+/* ---------- Loader (same pattern as the previous site: name · counter · line, then wipe up) ---------- */
+.loader{position:fixed;inset:0;z-index:200;display:none;flex-direction:column;justify-content:center;padding-inline:clamp(16px,9vw,160px);background:#0B0D12;color:#F3F0EA;clip-path:inset(0);transition:clip-path 1.05s cubic-bezier(.76,0,.24,1)}
+.intro .loader{display:flex}
+.ld-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.ld-name{display:flex;align-items:center;gap:12px;font:400 12.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase}
+.ld-name img{width:22px;height:22px;object-fit:cover;object-position:50% 18%}
+.ld-count{font:300 clamp(40px,6vw,72px)/1 var(--serif);letter-spacing:-.02em;color:rgba(243,240,234,.62);font-variant-numeric:tabular-nums}
+.ld-line{height:1px;margin-top:18px;background:rgba(243,240,234,.16);overflow:hidden}
+.ld-line i{display:block;height:100%;background:var(--amber);transform:scaleX(0);transform-origin:left}
+.ld-foot{display:flex;justify-content:space-between;margin-top:14px;font:400 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(243,240,234,.42)}
+.loaded .loader{clip-path:inset(0 0 100% 0)}
+.loader.gone{display:none!important}
+.intro:not(.intro-go) body{overflow:hidden}
+.intro:not(.intro-go) .nav{opacity:0;translate:0 -20px}
+.intro .nav{transition:opacity .9s var(--ease) .35s,translate .9s var(--ease) .35s,background .4s,color .4s,border-color .4s}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .line > span,.hero__sub,.hero__cta,.rv-in{transform:none!important;opacity:1!important}
+  .loader{display:none!important}
 }
 </style>
 </head>
 <body>
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="ld-row"><span class="ld-name"><img src="assets/hero.webp" alt="" width="22" height="22">Fauzan Ardhiansyah</span><span class="ld-count"><span id="ldNum">0</span>%</span></div>
+  <div class="ld-line"><i id="ldBar"></i></div>
+  <div class="ld-foot"><span>UI/UX &amp; Product Designer</span><span>Portfolio</span></div>
+</div>
 <a class="skip" href="#main">Skip to content</a>
 
 <!-- NAV -->
@@ -565,7 +632,8 @@ section{scroll-margin-top:64px}
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="sheet"><span></span>Menu</button>
     <a href="#top" class="brand" aria-label="Fauzan, back to top"><img class="brand__me" src="assets/hero.webp" alt="" width="24" height="24">Fauzan</a>
     <div class="nav__right">
-      <a class="login" href="https://dribbble.com/ozanardhi23" target="_blank" rel="noopener">Dribbble</a>
+      <a class="avail" href="#contact"><i aria-hidden="true"></i><span>Available<span class="avail__more"> for projects</span></span></a>
+      <button class="theme-sw" type="button" role="switch" aria-checked="false" aria-label="Dark mode"><svg class="i-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><svg class="i-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.5"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
       <a class="btn btn--sm btn--light" href="#contact">Let's talk</a>
     </div>
   </div>
@@ -579,6 +647,10 @@ section{scroll-margin-top:64px}
     <a href="#process">Process <small>03</small></a><a href="#live">Live sites <small>04</small></a>
     <a href="#reviews">Reviews <small>05</small></a><a href="#contact">Contact <small>06</small></a>
   </nav>
+  <div class="sheet__foot">
+    <a class="avail" href="#contact"><i aria-hidden="true"></i>Available for projects</a>
+    <span class="sheet__theme">Theme <button class="theme-sw" type="button" role="switch" aria-checked="false" aria-label="Dark mode"><svg class="i-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><svg class="i-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.5"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></span>
+  </div>
 </div>
 
 <main id="main">
@@ -1013,7 +1085,37 @@ if (fine && !reduce) {
 }
 
 /* --- hero intro + pointer field --- */
-requestAnimationFrame(() => document.body.classList.add('ready'));
+/* --- loader: counter + line fill (waits for the page, min 1.7s, max ~4.5s), wipe up, then the hero assembles --- */
+{
+  const root = document.documentElement, loader = document.getElementById('loader');
+  const ldNum = document.getElementById('ldNum'), ldBar = document.getElementById('ldBar');
+  const reveal = () => {
+    if (document.body.classList.contains('loaded')) return;
+    document.body.classList.add('loaded');
+    root.classList.add('intro-go');
+    setTimeout(() => document.body.classList.add('ready'), 380);   /* hero lines rise as the wipe clears */
+    loader.addEventListener('transitionend', () => loader.classList.add('gone'), {once:true});
+    setTimeout(() => loader.classList.add('gone'), 1400);
+  };
+  if (!root.classList.contains('intro')) {
+    loader.classList.add('gone'); document.body.classList.add('loaded');
+    requestAnimationFrame(() => document.body.classList.add('ready'));
+  } else {
+    let pageLoaded = document.readyState === 'complete', p = 0;
+    const t0 = performance.now(), MIN = 1700;
+    addEventListener('load', () => { pageLoaded = true; });
+    setTimeout(() => { pageLoaded = true; }, 4500);
+    const tick = () => {
+      const t = Math.min(1, (performance.now() - t0) / MIN), eased = 1 - Math.pow(1 - t, 3);
+      p = Math.max(p, Math.min(pageLoaded ? 1 : .9, eased));
+      ldNum.textContent = Math.round(p * 100);
+      ldBar.style.transform = `scaleX(${p})`;
+      if (p < 1) setTimeout(tick, 16); else setTimeout(reveal, 280);
+    };
+    tick();
+    setTimeout(reveal, 6000);   /* safety net */
+  }
+}
 const hero = document.querySelector('.hero'), field = document.querySelector('.field');
 if (fine && !reduce) hero.addEventListener('pointermove', e => {
   const r = hero.getBoundingClientRect();
@@ -1040,13 +1142,6 @@ const onScroll = () => {
   /* nav stays fixed: dark glass while over the hero, light glass after it */
   nav.classList.toggle('solid', y > 24);
   nav.classList.toggle('on-dark', y < hero.offsetHeight - 64);
-  {
-    /* showreel grows from an inset frame to full width as it rises */
-    const r = reelFrame.parentElement.getBoundingClientRect();
-    const p = clamp01((innerHeight * .95 - r.top) / (innerHeight * .7));
-    const min = innerWidth < 640 ? .9 : .82;
-    reelFrame.style.setProperty('--rs', reduce ? 1 : (min + (1 - min) * (1 - Math.pow(1 - p, 3))).toFixed(4));
-  }
   if (!reduce && y < innerHeight * 1.1) {
     /* hero copy drifts and fades as the reel takes over */
     const p = clamp01(y / innerHeight);
@@ -1086,6 +1181,20 @@ new IntersectionObserver(([e]) => {
   if (e.isIntersecting && !userPaused) tryPlay(); else if (!e.isIntersecting) reelVideo.pause();
 }, {threshold:.15}).observe(reelVideo);
 syncBtn();
+
+/* --- light / dark switch (light by default; the choice is remembered per browser) --- */
+{
+  const root = document.documentElement, sws = document.querySelectorAll('.theme-sw');
+  const sync = () => sws.forEach(b => b.setAttribute('aria-checked', root.dataset.theme === 'dark'));
+  sws.forEach(b => b.addEventListener('click', () => {
+    const dark = root.dataset.theme !== 'dark';
+    if (!reduce) { root.classList.add('theme-anim'); clearTimeout(root._ta); root._ta = setTimeout(() => root.classList.remove('theme-anim'), 500); }
+    if (dark) root.dataset.theme = 'dark'; else delete root.dataset.theme;
+    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+    sync();
+  }));
+  sync();
+}
 
 /* --- mobile sheet --- */
 const sheet = document.getElementById('sheet'), menuBtn = document.getElementById('menuBtn'), closeBtn = document.getElementById('closeBtn');
