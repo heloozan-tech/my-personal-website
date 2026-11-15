@@ -62,6 +62,9 @@ p{margin:0}
 .nav__links a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
 .nav__links a:hover{opacity:1}
 .nav__links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-cv{display:inline-flex;align-items:center;gap:6px}
+.nav-cv__ic{transition:transform .4s var(--ease)}
+.nav-cv:hover .nav-cv__ic{transform:translateY(2px)}
 .brand{font:400 15px/1 var(--serif);letter-spacing:.42em;text-transform:uppercase;padding-left:.42em;display:flex;align-items:center;gap:10px}
 .brand__me{width:24px;height:24px;object-fit:cover;object-position:50% 18%;flex:none;background:#22324F}
 .nav__right{display:flex;justify-content:flex-end;align-items:center;gap:12px;font-size:14px}
@@ -478,6 +481,13 @@ section{scroll-margin-top:64px}
 .me small{display:block;color:var(--on-dark-muted);font-size:13.5px}
 .mail{font:300 clamp(22px,2.4vw,30px)/1 var(--serif);border-bottom:1px solid var(--dark-line);padding-bottom:6px;transition:border-color .3s}
 .mail:hover{border-color:var(--amber)}
+/* CV download: outline button next to the main CTA */
+.cta__btns{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.cv-btn{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 20px;border:1px solid rgba(236,234,228,.28);color:var(--on-dark);font-size:15px;white-space:nowrap;transition:background .3s,border-color .3s,color .3s}
+.cv-btn:hover{background:var(--on-dark);color:#0B0D12;border-color:var(--on-dark)}
+.cv-btn__ic{transition:transform .45s var(--ease)}
+.cv-btn:hover .cv-btn__ic{transform:translateY(2px)}
+.cv-btn__meta{font:400 10.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.55}
 .foot{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--dark-line)}
 .foot a{display:flex;justify-content:space-between;align-items:center;padding:24px var(--gutter);border-right:1px solid var(--dark-line);font-size:15px;transition:background .3s}
 .foot a:last-child{border-right:0}
@@ -559,6 +569,8 @@ section{scroll-margin-top:64px}
   .card__cat{display:none}
   .foot{grid-template-columns:1fr}
   .foot a{border-right:0!important;border-bottom:1px solid var(--dark-line)}
+  .cta__btns{width:100%}
+  .cta__btns > a{flex:1 1 auto;justify-content:center}
   .legal{flex-direction:column}
   .nav__right .avail,.nav__right .theme-sw{display:none}
   .tabs{display:flex;margin-right:var(--gutter)}
@@ -627,7 +639,7 @@ section{scroll-margin-top:64px}
 <header class="nav" id="nav">
   <div class="wrap nav__in">
     <nav class="nav__links" aria-label="Primary">
-      <a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#reviews">Reviews</a>
+      <a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#reviews">Reviews</a><a class="nav-cv" href="assets/cv/Fauzan-Ardhiansyah-CV.pdf" download="CV Fauzan Ardhiansyah.pdf" type="application/pdf">CV <svg class="nav-cv__ic" width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5v9M4 7l4 4 4-4M2 14.5h12" stroke="currentColor" stroke-width="1.6"/></svg></a>
     </nav>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="sheet"><span></span>Menu</button>
     <a href="#top" class="brand" aria-label="Fauzan, back to top"><img class="brand__me" src="assets/hero.webp" alt="" width="24" height="24">Fauzan</a>
@@ -646,6 +658,7 @@ section{scroll-margin-top:64px}
     <a href="#services">Services <small>01</small></a><a href="#work">Work <small>02</small></a>
     <a href="#process">Process <small>03</small></a><a href="#live">Live sites <small>04</small></a>
     <a href="#reviews">Reviews <small>05</small></a><a href="#contact">Contact <small>06</small></a>
+    <a href="assets/cv/Fauzan-Ardhiansyah-CV.pdf" download="CV Fauzan Ardhiansyah.pdf" type="application/pdf">Download CV <small>PDF ↓</small></a>
   </nav>
   <div class="sheet__foot">
     <a class="avail" href="#contact"><i aria-hidden="true"></i>Available for projects</a>
@@ -823,7 +836,10 @@ section{scroll-margin-top:64px}
       <div class="cta__side rv-in">
         <div class="me"><img src="assets/hero.webp" alt="Portrait of Fauzan Ardhiansyah" loading="lazy"><span><b>Fauzan Ardhiansyah</b><small>UI/UX &amp; Product Designer · Open to work</small></span></div>
         <a class="mail" href="mailto:heloozan@gmail.com">heloozan@gmail.com</a>
+        <div class="cta__btns">
         <a class="crop mag" href="mailto:heloozan@gmail.com?subject=New%20project"><i class="c c1"></i><i class="c c2"></i><i class="c c3"></i><i class="c c4"></i><span class="crop__txt">Start a project</span><span class="crop__arr"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor"/></svg></span></a>
+        <a class="cv-btn mag" href="assets/cv/Fauzan-Ardhiansyah-CV.pdf" download="CV Fauzan Ardhiansyah.pdf" type="application/pdf"><svg class="cv-btn__ic" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5v9M4 7l4 4 4-4M2 14.5h12" stroke="currentColor" stroke-width="1.3"/></svg>Download CV<span class="cv-btn__meta">PDF · 3.4 MB</span></a>
+        </div>
       </div>
     </div>
     <nav class="foot" aria-label="Elsewhere">
