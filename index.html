@@ -343,7 +343,8 @@ section{scroll-margin-top:64px}
 .jcols span{padding:.6em 0 0;border-left:1px dashed rgba(18,20,23,.1);padding-left:.5em}
 .jcols span:first-child{border-left:0;padding-left:0}
 .jsvg{width:100%;height:7.5em;display:block;overflow:visible}
-.pdraw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s var(--ease) .35s}
+/* dash is 2× the normalised length: with non-scaling strokes the on-screen path is longer than pathLength, so a 1/1 dash stopped short */
+.pdraw{stroke-dasharray:2 2;stroke-dashoffset:2;transition:stroke-dashoffset 1.8s var(--ease) .35s}
 :is(.on,.lit) .pdraw{stroke-dashoffset:0}
 .jdot{opacity:0;transition:opacity .4s var(--ease) var(--jd)}
 :is(.on,.lit) .jdot{opacity:1}
@@ -594,8 +595,12 @@ section{scroll-margin-top:64px}
   .cta__btns > a{flex:1 1 auto;justify-content:center}
   .legal{flex-direction:column}
   .nav__right .avail,.nav__right .theme-sw{display:none}
-  .tabs{display:flex;margin-right:var(--gutter)}
-  .tab{flex:1 1 auto;justify-content:center;padding:0 10px}
+  /* 2 × 2 grid on phones so every tab gets the same width */
+  .tabs{display:grid;grid-template-columns:1fr 1fr;margin-right:var(--gutter)}
+  .tab{justify-content:center;padding:0 10px;height:40px}
+  .tab:nth-of-type(odd){border-right:1px solid var(--line)}
+  .tab:nth-of-type(even){border-right:0}
+  .tab:nth-of-type(-n+2){border-bottom:1px solid var(--line)}
   .slider{min-height:0}
 }
 
