@@ -863,7 +863,7 @@ section{scroll-margin-top:64px}
     <div class="rv">
       <div class="stats">
         <div class="stat"><b data-count="96">0</b><span>Shots on Dribbble</span></div>
-        <div class="stat"><b data-count="12">0</b><span>Products on UI8</span></div>
+        <div class="stat"><b data-count="15">0</b><span>Products on UI8</span></div>
       </div>
       <div class="slider" id="slider" aria-roledescription="carousel" aria-label="Client reviews">
         <div class="slides" aria-live="polite">
@@ -959,11 +959,12 @@ const live = [
   ['pinasthikafest.id','Pinasthika Fest','Creative festival website','https://www.pinasthikafest.id/','pinasthika'],
   ['genesyventures.studio','Genesy Ventures','Business transformation studio','https://genesyventures.studio/','genesy'],
 ];
+/* Newest four from ui8.net/users/helpy-lab-b656dd (store order = newest first). Cover: UI8 CDN image id, or a local assets/ui8 file. */
 const shop = [
+  ['Ion — AI Agent App UI Kit','$79','UI kit','https://images.ui8.net/product/6afbfb7b5d1d7400390ba8ad/604_420_1.webp','ion--ai-agent-app-ui-kit'],
+  ['Binlo — Inventory & Warehouse UI Kit','$59','UI kit','https://images.ui8.net/product/6af823ca11e5fa003345ad9b/604_420_1.webp','binlo-inventory--warehouse-ui-kit'],
+  ['Ledgerline — B2B SaaS Website UI Kit','$42','UI kit','https://images.ui8.net/product/6aeb93134782ae003374c7cf/604_420_2.webp','ledgerline--b2b-finance-website--dashboard-ui-kit'],
   ['Lanecraft — AI Logistics Landing Page','$35','UI kit','ui8-01','lanecraft---ai-logistics-landing-page'],
-  ['Nurso — Pitch Deck Template','$13','Presentation','ui8-02','nurso---pitchdeck-template'],
-  ['Hopeheal — Health Care Mobile App','$15','UI kit','ui8-09','hopeheal----health-care-mobile-app'],
-  ['PhotoGrapz — Personal Website','$18','UI kit','ui8-10','photograpz---personal-website-template'],
 ];
 const arrow = '<svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor"/></svg>';
 
@@ -983,7 +984,7 @@ document.getElementById('liveList').innerHTML = live.map(l => `
     <span class="row__go"><span class="badge">Live</span>${arrow}</span></a>`).join('');
 document.getElementById('shopGrid').innerHTML = shop.map(p => `
   <a class="prod rv-in" href="https://ui8.net/helpy-lab-b656dd/products/${p[4]}" target="_blank" rel="noopener">
-    <div class="prod__img"><img src="${A}ui8/${p[3]}.webp" alt="${p[0]} cover" loading="lazy"></div>
+    <div class="prod__img"><img src="${p[3].startsWith('http') ? p[3] : `${A}ui8/${p[3]}.webp`}" alt="${p[0]} cover" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></div>
     <div class="prod__meta"><b>${p[0]}</b><span class="price">${p[1]}</span></div><span class="label">${p[2]}</span></a>`).join('');
 
 /* --- services: isometric line illustrations (inline SVG, animated in CSS) --- */
